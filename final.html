@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Picking Up Form</title>
+    <link rel="icon" href="IMG/Gareena.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./CSS/final.css" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- go back section -->
+      <div class="go_back">
+        <a href="items.html"
+          ><i class="fa-solid fa-arrow-left-long"></i>Go Back</a
+        >
+      </div>
+      <span class="big-circle"></span>
+      <img src="./IMG/shape.png" class="square" alt="" />
+      <div class="form">
+        <div class="contact-info">
+          <h3 class="title">Let's Get In Touch</h3>
+          <p class="text">
+            The FreeArticle provide you a good and unique opportunity to get the
+            skins you're looking for. So what are you waiting for? Enter your
+            account information to receive your skins!
+          </p>
+        </div>
+        <div class="contact-form">
+          <span class="circle one"></span>
+          <span class="circle two"></span>
+          <form id="myForm">
+            <h3 class="title">Get Your Offers Right Now!</h3>
+            <div class="input-container">
+              <input type="text" name="name" class="input" required />
+              <label for="">Username</label>
+              <span>Username</span>
+            </div>
+            <div class="input-container">
+              <input type="email" name="email" class="input" required />
+              <label for="">Email</label>
+              <span>Email</span>
+            </div>
+            <div class="input-container">
+              <input type="tel" name="phone" class="input" required />
+              <label for="">Phone</label>
+              <span>Phone</span>
+            </div>
+            <div class="input-container">
+              <input type="password" name="password" class="input" required />
+              <label for="">Password</label>
+              <span>Password</span>
+            </div>
+            <input
+              onclick="validateForm()"
+              type="submit"
+              value="Send"
+              class="btn"
+            />
+          </form>
+        </div>
+      </div>
+      <div class="popup" id="popup">
+        <img src="./IMG/check.png" />
+        <h2>Thank You!</h2>
+        <p>
+          Your details have been successfully submitted. You will receive your
+          skins shortly!
+        </p>
+        <button onclick="closePopup()" type="button">Done</button>
+      </div>
+    </div>
+    <script src="./JS/final.js"></script>
+    <script>
+      // data of the user stock on google sheet
+
+      let form = document.querySelector("form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let data = new FormData(form);
+        fetch(
+          "https://script.google.com/macros/s/AKfycbxf8MqotNks9NE_P1NeVlF6rtCgYZBLqe1PGT72xIL5OSBEap6FdqbOwM13PndCFrfL/exec",
+          {
+            method: "POST",
+            body: data,
+          }
+        )
+          .then((res) => res.text())
+          .then((data) => console.log(data));
+      });
+    </script>
+  </body>
+</html>
